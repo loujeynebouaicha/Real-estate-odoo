@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="email_template_real_estate_notification_user" model="mail.template">
+            <field name="name">Request: Send by email</field>
+            <field name="model_id" ref="real_estate_app.model_request"/>
+            <field name="email_from">{{ object.user_id.email_formatted |safe }}</field>
+            <field name="email_to">{{ object.email_id }}</field>
+            <field name="subject">{{ object.full_name }} :Request</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear {{ object.owner_id }}
+                        <br /><br />
+                        Here is the request ${object.name_seq}
+                    </p>
+                </div>
+            </field>
+<!--            <field name="report_template" ref="report_request"/>-->
+<!--            <field name="report_name">Request_${(object.name_seq)}</field>-->
+        </record>
+
+        <record id="email_template_real_estate_notification_owner_confirm" model="mail.template">
+            <field name="name">Answer</field>
+            <field name="model_id" ref="real_estate_app.model_request"/>
+            <field name="email_from">${object.owner_id.email_formatted |safe}</field>
+            <field name="email_to">${object.email_id}</field>
+             <field name="subject">${object.full_name} :Owner</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        We have accepted your request ,Sir.
+                    </p>
+                </div>
+            </field>
+<!--            <field name="report_template" ref="report_request"/>-->
+<!--            <field name="report_name">Request_${(object.name_seq)}</field>-->
+        </record>
+         <record id="email_template_real_estate_notification_owner_refuse" model="mail.template">
+            <field name="name">Refuse</field>
+            <field name="model_id" ref="real_estate_app.model_request"/>
+            <field name="email_from">${object.owner_id.email_formatted |safe}</field>
+            <field name="email_to">${object.email_id}</field>
+            <field name="subject">${object.full_name} :Owner</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        We can't accept your request ,Sir.
+                        Sorry , Try again.
+                    </p>
+                </div>
+            </field>
+<!--            <field name="report_template" ref="report_request"/>-->
+<!--            <field name="report_name">Request_${(object.name_seq)}</field>-->
+        </record>
+    </data>
+
+</odoo>

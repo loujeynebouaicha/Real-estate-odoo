@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="tenant_tree" model="ir.ui.view">
+        <field name="name">tenant.tree</field>
+        <field name="model">tenant</field>
+        <field name="arch" type="xml">
+            <tree string="Tenants">
+                <field name="name"/>
+                <field name="mail"/>
+                <field name="phone"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tenant_form" model="ir.ui.view">
+        <field name="name">tenant.form</field>
+        <field name="model">tenant</field>
+        <field name="arch" type="xml">
+            <form string="Tenants">
+<!--                <header>-->
+<!--                    <button id="button_confirm" name="action_confirm" type="object" string="Confirm" class="oe_highlight" states="draft"/>-->
+<!--                    <button id="button_done" name="action_done" type="object" string="Done" class="oe_highlight"-->
+<!--                            attrs="{'invisible': [('state','!=', 'confirm')]}"/>-->
+<!--                    <button id="button_draft" name="action_draft" type="object" string="Set To Draft" class="oe_highlight"/>-->
+<!--                    <button id="button_cancel" name="action_cancel" type="object" string="Cancel" class="oe_highlight"/>-->
+<!--                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>-->
+<!--                </header>-->
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="mail"/>
+                        <field name="phone"/>
+                    </group>
+                     <notebook>
+                        <page string="Available Properties">
+                            <field name="property_ids" context="{'default_state': 'available'}">
+                                <tree string="Available Properties">
+                                    <field name="name"/>
+                                    <field name="location"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="tenant_kanban" model="ir.ui.view">
+        <field name="name">tenant.kanban</field>
+        <field name="model">tenant</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="mail"/>
+                <field name="phone"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click ">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>Name :
+                                        <field name="name"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="tenant_search" model="ir.ui.view">
+        <field name="name">tenant.search</field>
+        <field name="model">tenant</field>
+        <field name="arch" type="xml">
+            <search string="Search The Tenant">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_tenant" model="ir.actions.act_window">
+        <field name="name">tenant</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tenant</field>
+        <!--        <field name="view_type">form</field>-->
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                FIND YOUR PLACE OF DREAM !
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="tenants_menu"
+              name="Tenants"
+              action="action_tenant"
+              parent="contact_menu"
+              sequence="20"/>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property,access.property,model_property,,1,1,1,1
+access_owner,access.owner,model_owner,,1,1,1,1
+access_tenant,access.tenant,model_tenant,,1,1,1,1
+access_tenant_owner,access.tenant_owner,model_tenant,,1,0,0,0
+access_request,access.request,model_request,,1,1,1,1
+access_maintenance,access.maintenance,model_maintenance_wizard,,1,1,1,1
+
